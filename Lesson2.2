@@ -1,0 +1,43 @@
+using System;
+// you can also use other imports, for example:
+// using System.Collections.Generic;
+
+// you can write to stdout for debugging purposes, e.g.
+// Console.WriteLine("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        // write your code in C# 6.0 with .NET 4.5 (Mono)
+        int cnt =0;
+        long[] temp = Array.ConvertAll(A,new Converter<int, long>(intToLong));
+        //long[] temp= Array.ConvertAll(A, val => (long)val);
+
+        Array.Sort(temp);
+        for(int i=0; i<temp.Length;i++){
+            if(temp.Length == 1 || i == temp.Length-1)
+                return (int)temp[i];
+            if(temp[i]==temp[i+1]){
+                cnt++;
+            }else{
+                if(cnt==0)
+                    return (int)temp[i];
+                cnt =0;
+            }    
+        }
+        return -1;
+    }
+    
+    public long intToLong(int t){
+        return (long)t;    
+    }
+}
+
+/*Test Cases
+
+small random test n=201
+medium random test n=100,003
+big random test n=999,999, multiple repetitions
+
+
+
+*/
